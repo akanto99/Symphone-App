@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:symphone_app/provider/DarkAndLightTheme/theme_provider.dart';
 import 'package:symphone_app/res/color.dart';
 import 'package:symphone_app/responsive/responsive_ui.dart';
+import 'package:symphone_app/utils/routes/routes_name.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -71,24 +72,28 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              boxContainer('assets/images/home_icons/cal.png', 'Hotline'),
-              boxContainer('assets/images/home_icons/service.png', 'Service Center'),
+              boxContainer(isDarkMode ?'assets/images/home_icons/dark/support.png' : 'assets/images/home_icons/cal.png', 'Hotline'),
+              boxContainer(isDarkMode ?'assets/images/home_icons/dark/power.png' : 'assets/images/home_icons/service.png', 'Service Center'),
             ],
           ),
           SizedBox(height: screenHeight*0.02,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              boxContainer('assets/images/home_icons/law.png', 'LSO Query'),
-              boxContainer('assets/images/home_icons/review.png', 'Feedback'),
+              GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, RoutesName.lsoScreen);
+                  },
+                  child: boxContainer(isDarkMode ?'assets/images/home_icons/dark/law.png' :'assets/images/home_icons/law.png', 'LSO Query')),
+              boxContainer(isDarkMode ?'assets/images/home_icons/dark/comment.png' :'assets/images/home_icons/review.png', 'Feedback'),
             ],
           ),
           SizedBox(height: screenHeight*0.02,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              boxContainer('assets/images/home_icons/clipboard.png', 'Specification'),
-              boxContainer('assets/images/home_icons/booking.png', 'Book An\nAppointment'),
+              boxContainer(isDarkMode ?'assets/images/home_icons/dark/profile.png' :'assets/images/home_icons/clipboard.png', 'Specification'),
+              boxContainer(isDarkMode ?'assets/images/home_icons/dark/apoint.png' :'assets/images/home_icons/booking.png', 'Book An\nAppointment'),
             ],
           ),
         ],

@@ -8,7 +8,9 @@ import 'package:symphone_app/view/screens/social_screen.dart';
 import 'package:symphone_app/view/screens/website_screen.dart';
 
 class NavigationScreen extends StatefulWidget {
-  const NavigationScreen({super.key});
+  final int initialIndex;
+
+  const NavigationScreen({super.key,this.initialIndex =1});
 
   @override
   State<NavigationScreen> createState() => _NavigationScreenState();
@@ -39,6 +41,7 @@ class _NavigationScreenState extends State<NavigationScreen> with SingleTickerPr
       lowerBound: 0.0,
       upperBound: 1.0,
     );
+    _currentIndex = widget.initialIndex;
   }
 
   @override
