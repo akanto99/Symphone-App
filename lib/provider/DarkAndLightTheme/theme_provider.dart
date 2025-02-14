@@ -1,54 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// class ThemeProvider extends ChangeNotifier{
-//   ThemeMode themeMode= ThemeMode.light;
-//   bool get isDarkMode =>themeMode==ThemeMode.dark;
-//
-//   void toggleTheme(bool isOn){
-//     themeMode= isOn ? ThemeMode.dark: ThemeMode.light;
-//     notifyListeners();
-//   }
-//
-// }
-class ThemeProvider extends ChangeNotifier {
-  ThemeMode _themeMode = ThemeMode.light;
+class ThemeProvider extends ChangeNotifier with WidgetsBindingObserver {
+  ThemeMode themeMode = ThemeMode.system;
 
-  ThemeMode get themeMode => _themeMode;
-  bool get isDarkMode => _themeMode == ThemeMode.dark;
+  bool get isDarkMode => themeMode == ThemeMode.dark;
 
-  Future<void> toggleTheme(bool isOn) async {
-    _themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
-    notifyListeners();
+  ThemeProvider() {
+    WidgetsBinding.instance.addObserver(this); // Observe system brightness changes
+  }
 
-    // Save the selected theme mode to shared preferences
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isDarkMode', isOn);
+  @override
+  void didChangePlatformBrightness() {
+    updateSystemTheme(); // Update theme when system changes
   }
 
   Future<void> initializeTheme() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isDarkMode = prefs.getBool('isDarkMode') ?? false;
-    _themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('isDarkMode')) {
+      final isDark = prefs.getBool('isDarkMode') ?? false;
+      themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+    } else {
+      // Default to system theme
+      updateSystemTheme();
+    }
     notifyListeners();
+  }
+
+  void updateSystemTheme() {
+    final brightness = WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    themeMode = brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+    notifyListeners();
+  }
+
+  Future<void> toggleTheme(bool isDark) async {
+    themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkMode', isDark);
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 }
 
-class MyThemes{
-  static final darkTheme= ThemeData(
-    // scaffoldBackgroundColor: Colors.grey.shade900,
-    scaffoldBackgroundColor: Colors.black,
-    colorScheme: ColorScheme.dark(),
-    primaryColor: Colors.black,
-    iconTheme: IconThemeData(color: Colors.white,opacity: 0.8)
 
+
+class MyThemes {
+  static final lightTheme = ThemeData(
+    brightness: Brightness.light,
+    primaryColor: Colors.white,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+    ),
   );
 
-
-  static final lightTheme= ThemeData(
-    scaffoldBackgroundColor: Colors.white,
-    colorScheme: ColorScheme.light(),
-      primaryColor: Colors.white,
-      iconTheme: IconThemeData(color: Colors.black,opacity: 0.8)
+  static final darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    primaryColor: Colors.black,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.black, // Ensures dark mode support
+    ),
   );
 }

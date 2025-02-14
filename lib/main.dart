@@ -1,24 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:symphone_app/view/navigation_bar.dart';
-import 'package:symphone_app/view/splash_screen/splash_view.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:symphone_app/provider/DarkAndLightTheme/theme_provider.dart';
+import 'package:symphone_app/res/color.dart';
+import 'package:symphone_app/utils/routes/routes.dart';
+import 'package:symphone_app/utils/routes/routes_name.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final themeProvider = ThemeProvider();
+  await themeProvider.initializeTheme();
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => themeProvider,
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: SplashScreen(),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        print("Current Theme Mode: ${themeProvider.isDarkMode ? 'Dark' : 'Light'}");
+        bool isDarkMode = themeProvider.isDarkMode;
+
+        SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(
+            systemNavigationBarColor: isDarkMode ? AppColors.blackColor : AppColors.whiteColor,
+            statusBarColor: isDarkMode ? AppColors.blackColor : AppColors.whiteColor,
+            statusBarIconBrightness: isDarkMode ? Brightness.light : Brightness.dark,
+            statusBarBrightness: isDarkMode ? Brightness.dark : Brightness.light,
+          ),
+        );
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          themeMode: themeProvider.themeMode,
+          theme: MyThemes.lightTheme,
+          darkTheme: MyThemes.darkTheme,
+          initialRoute: RoutesName.splash,
+          onGenerateRoute: Routes.generateRoute,
+        );
+      },
     );
   }
 }
-
