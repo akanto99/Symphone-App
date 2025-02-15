@@ -90,13 +90,19 @@ class _LsoScreenState extends State<LsoScreen> {
                     width: screenWidth * 0.90,
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.red,
+                        InkWell(
+                          onTap:(){
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: screenWidth*0.08,
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.red,
+                            ),
+                          ),
                         ),
-                        SizedBox(
-                          width: screenWidth * 0.02,
-                        ),
+
                         Text("LSO Query",
                             style: GoogleFonts.urbanist(
                               fontSize: 20,
@@ -185,7 +191,7 @@ class _LsoScreenState extends State<LsoScreen> {
             ),
 
             Container(
-              height: screenHeight * 0.12,
+              height: screenHeight * 0.09,
               decoration: BoxDecoration(
                 color: isDarkMode ? Color(0xff181818) : Colors.white,
                 borderRadius: BorderRadius.only(

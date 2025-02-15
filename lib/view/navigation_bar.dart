@@ -66,7 +66,7 @@ class _NavigationScreenState extends State<NavigationScreen> with SingleTickerPr
       backgroundColor: isDarkMode ? AppColors.blackColor :null,
       body: _pages[_currentIndex],
       bottomNavigationBar: Container(
-        height: screenHeight * 0.12,
+        height: screenHeight * 0.09,
         decoration: BoxDecoration(
           color: isDarkMode ? Color(0xff181818) : Colors.white,
           borderRadius: BorderRadius.only(

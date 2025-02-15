@@ -5,6 +5,7 @@ import 'package:symphone_app/view/screens/home_screen.dart';
 import 'package:symphone_app/view/screens/social_screen.dart';
 import 'package:symphone_app/view/screens/website_screen.dart';
 import 'package:symphone_app/view/splash_screen/splash_view.dart';
+import 'package:symphone_app/view/sub_screens/card_screen.dart';
 import 'package:symphone_app/view/sub_screens/lso_screen.dart';
 
 class Routes {
@@ -17,6 +18,8 @@ class Routes {
         ///Sub Screens
       case RoutesName.lsoScreen:
         return MaterialPageRoute(builder: (BuildContext context) => const LsoScreen());
+        case RoutesName.cardScreen:
+        return MaterialPageRoute(builder: (BuildContext context) => const CardScreen());
 
 
 
