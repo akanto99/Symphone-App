@@ -74,6 +74,7 @@ flutter:
     - assets/images/home_icons/dark/
     - assets/images/home_icons/items/
     - assets/images/navImages/
+    - assets/images/specification/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
