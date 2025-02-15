@@ -101,7 +101,11 @@ class _CardScreenState extends State<CardScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              boxContainer(isDarkMode ?'assets/images/home_icons/dark/profile.png' :'assets/images/home_icons/light/clipboard.png', 'Specification'),
+              GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, RoutesName.specificationScreen);
+                  },
+                  child: boxContainer(isDarkMode ?'assets/images/home_icons/dark/profile.png' :'assets/images/home_icons/light/clipboard.png', 'Specification')),
               boxContainer(isDarkMode ?'assets/images/home_icons/dark/apoint.png' :'assets/images/home_icons/light/booking.png', 'Book An\nAppointment'),
             ],
           ),

@@ -7,6 +7,7 @@ import 'package:symphone_app/view/screens/website_screen.dart';
 import 'package:symphone_app/view/splash_screen/splash_view.dart';
 import 'package:symphone_app/view/sub_screens/card_screen.dart';
 import 'package:symphone_app/view/sub_screens/lso_screen.dart';
+import 'package:symphone_app/view/sub_screens/specification_screen.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -20,6 +21,8 @@ class Routes {
         return MaterialPageRoute(builder: (BuildContext context) => const LsoScreen());
         case RoutesName.cardScreen:
         return MaterialPageRoute(builder: (BuildContext context) => const CardScreen());
+case RoutesName.specificationScreen:
+        return MaterialPageRoute(builder: (BuildContext context) => const SpecificationScreen());
 
 
 
