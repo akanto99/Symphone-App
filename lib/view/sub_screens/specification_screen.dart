@@ -366,7 +366,7 @@ class _SpecificationScreenState extends State<SpecificationScreen> {
 
     return Container(
       width: screenWidth * 0.43,
-      height: screenHeight * 0.19,
+      height: screenHeight * 0.22,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.0),
         color: isDarkMode ? AppColors.blackOpColor : AppColors.whiteColor,
@@ -438,7 +438,7 @@ class _SpecificationScreenState extends State<SpecificationScreen> {
 
     return Container(
       width: screenWidth * 0.90,
-      height: screenHeight * 0.17,
+      height: screenHeight * 0.19,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.0),
         color: isDarkMode ? AppColors.blackOpColor : AppColors.whiteColor,

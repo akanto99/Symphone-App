@@ -120,7 +120,7 @@ class _CardScreenState extends State<CardScreen> {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Container(
-      height: screenHeight * 0.16,
+      height: screenHeight * 0.18,
       width: screenWidth * 0.45,
       decoration: BoxDecoration(
         color: themeProvider.isDarkMode ? AppColors.blackOpColor: AppColors.whiteColor,

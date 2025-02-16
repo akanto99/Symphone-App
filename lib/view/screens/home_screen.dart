@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child:Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -165,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: (){},
                         child: Container(
                           height: screenHeight*0.052,
-                          width: screenWidth*0.4,
+                          width: screenWidth*0.38,
                           decoration: BoxDecoration(
                               color: AppColors.whiteColor,
                             borderRadius: BorderRadius.circular(10)
@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Center(
                             child: Text("Check Support",
                                 style: GoogleFonts.urbanist(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w600,
                                   color:  AppColors.blackColor,
                                   letterSpacing: 0.3,
