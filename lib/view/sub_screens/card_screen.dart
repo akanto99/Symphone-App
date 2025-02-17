@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:symphone_app/provider/DarkAndLightTheme/theme_provider.dart';
 import 'package:symphone_app/res/color.dart';
 import 'package:symphone_app/responsive/responsive_ui.dart';
+import 'package:symphone_app/view/sub_screens/hotline.dart';
 
 import '../../utils/routes/routes_name.dart';
 
@@ -81,8 +82,16 @@ class _CardScreenState extends State<CardScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              boxContainer(isDarkMode ?'assets/images/home_icons/dark/support.png' : 'assets/images/home_icons/light/cal.png', 'Hotline'),
-              boxContainer(isDarkMode ?'assets/images/home_icons/dark/power.png' : 'assets/images/home_icons/light/service.png', 'Service Center'),
+              GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HotLine()));
+                  },
+                  child: boxContainer(isDarkMode ?'assets/images/home_icons/dark/support.png' : 'assets/images/home_icons/light/cal.png', 'Hotline')),
+              GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, RoutesName.serviceScreen);
+                  },
+                  child: boxContainer(isDarkMode ?'assets/images/home_icons/dark/power.png' : 'assets/images/home_icons/light/service.png', 'Service Center')),
             ],
           ),
           SizedBox(height: screenHeight*0.02,),

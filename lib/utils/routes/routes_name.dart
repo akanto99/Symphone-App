@@ -5,6 +5,7 @@ class RoutesName {
   static const String lsoScreen = 'lsoScreen_view';
   static const String cardScreen = 'cardScreen_view';
   static const String specificationScreen = 'specificationScreen_view';
+  static const String serviceScreen = 'serviceScreen_view';
 
 
   static const String webScreen = 'webScreen_view';
