@@ -60,8 +60,8 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
               SizedBox(height: screenHeight*0.02),
               Container(
-                height: screenHeight * 0.03,
-                width: screenWidth * 0.06,
+                height: 20,
+                width: 20,
                 child: CircularProgressIndicator(
                   color: AppColors.blackColor,
                   strokeWidth: 3,

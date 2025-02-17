@@ -58,94 +58,90 @@ class _NavigationScreenState extends State<NavigationScreen> with SingleTickerPr
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isDarkMode = themeProvider.isDarkMode;
 
-    // Debugging: Print theme mode
-    print("Current Theme Mode: ${isDarkMode ? 'Dark' : 'Light'}");
-
-
     return Scaffold(
-      backgroundColor: isDarkMode ? AppColors.blackColor :null,
+      backgroundColor: isDarkMode ? AppColors.blackColor : null,
       body: _pages[_currentIndex],
       bottomNavigationBar: Container(
-        height: screenHeight * 0.09,
-        decoration: BoxDecoration(
-          color: isDarkMode ? Color(0xff181818) : Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(35),
-            topRight: Radius.circular(35),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color:isDarkMode ? AppColors.blackColor : Colors.black.withOpacity(0.1),
-              spreadRadius: 2,
-              blurRadius: 8,
-              offset: Offset(0, -2),
+        color: isDarkMode ? AppColors.blackColor : AppColors.whiteColor,
+        child: Container(
+          height: screenHeight * 0.09,
+          decoration: BoxDecoration(
+            color: isDarkMode ? Color(0xff181818) : Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(35),
+              topRight: Radius.circular(35),
             ),
-          ],
-          border: Border(
-            top: BorderSide(width: 2, color: isDarkMode ? AppColors.blackOpColor:AppColors.borderColor),
-            left: BorderSide(width: 2, color:isDarkMode ? AppColors.blackOpColor: AppColors.borderColor),
-            right: BorderSide(width: 2, color: isDarkMode ? AppColors.blackOpColor:AppColors.borderColor),
+            boxShadow: [
+              BoxShadow(
+                color: isDarkMode ? AppColors.blackColor : Colors.black.withOpacity(0.1),
+                spreadRadius: 2,
+                blurRadius: 8,
+                offset: Offset(0, -2),
+              ),
+            ],
+            border: Border(
+              top: BorderSide(width: 2, color: isDarkMode ? AppColors.blackOpColor : AppColors.borderColor),
+              left: BorderSide(width: 2, color: isDarkMode ? AppColors.blackOpColor : AppColors.borderColor),
+              right: BorderSide(width: 2, color: isDarkMode ? AppColors.blackOpColor : AppColors.borderColor),
+            ),
           ),
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(_labels.length, (index) {
-            bool isSelected = _currentIndex == index;
-            return InkWell(
-              onTap: () {
-                setState(() {
-                  _currentIndex = index;
-                  _bounceController.reset();
-                  _bounceController.forward();
-                });
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AnimatedBuilder(
-                      animation: _bounceController,
-                      builder: (context, child) {
-                        double scale = isSelected ? 1.3 + _bounceController.value * 0.1 : 1.0;
-                        return Transform.scale(
-                          scale: scale,
-                          child: child,
-                        );
-                      },
-                      child: Container(
-                        width: screenWidth * 0.14,
-                        child: SvgPicture.asset(
-                          _svgPaths[index],
-                          height: 24,
-                          width: 24,
-                          colorFilter: ColorFilter.mode(
-                            isSelected ? AppColors.redColor :
-                            (isDarkMode ? AppColors.whiteColor : Colors.black),
-                            // AppColors.greyColor,
-                            BlendMode.srcIn,
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(_labels.length, (index) {
+              bool isSelected = _currentIndex == index;
+              return InkWell(
+                onTap: () {
+                  setState(() {
+                    _currentIndex = index;
+                    _bounceController.reset();
+                    _bounceController.forward();
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AnimatedBuilder(
+                        animation: _bounceController,
+                        builder: (context, child) {
+                          double scale = isSelected ? 1.2 + _bounceController.value * 0.1 : 1.0;
+                          return Transform.scale(
+                            scale: scale,
+                            child: child,
+                          );
+                        },
+                        child: Container(
+                          width: screenWidth * 0.14,
+                          child: SvgPicture.asset(
+                            _svgPaths[index],
+                            height: 24,
+                            width: 24,
+                            colorFilter: isSelected
+                                ? ColorFilter.mode(AppColors.redColor, BlendMode.srcIn)
+                                : ColorFilter.mode(
+                                isDarkMode ? AppColors.whiteColor : Colors.black, BlendMode.srcIn),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      _labels[index],
-                      style: TextStyle(
-                        color: isSelected
-                            ? AppColors.redColor
-                            : (isDarkMode ? AppColors.whiteColor : Colors.black), // Adjust text color based on mode
-                        fontSize: isSelected ? 14 : 12,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      SizedBox(height: 10),
+                      Text(
+                        _labels[index],
+                        style: TextStyle(
+                          color: isSelected
+                              ? AppColors.redColor
+                              : (isDarkMode ? AppColors.whiteColor : Colors.black),
+                          fontSize: isSelected ? 14 : 12,
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                        ),
                       ),
-                    ),
-
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+          ),
         ),
       ),
     );

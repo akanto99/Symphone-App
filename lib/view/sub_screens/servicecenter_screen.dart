@@ -92,8 +92,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
     final origin = "${_currentLocation!.latitude},${_currentLocation!.longitude}";
     final dest = "${destination.latitude},${destination.longitude}";
 
-    final url =
-        'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$dest&key=AIzaSyDNvq6_p6fyrz06aFXl4nt3eOkbKF3s2Hg';
+    final url = 'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$dest&key=AIzaSyDNvq6_p6fyrz06aFXl4nt3eOkbKF3s2Hg';
 
     final response = await http.get(Uri.parse(url));
     print("API Response: ${response.body}");

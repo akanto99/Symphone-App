@@ -91,17 +91,14 @@ class _LsoScreenState extends State<LsoScreen> {
                     child: Row(
                       children: [
                         InkWell(
-                          onTap:(){
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            width: screenWidth*0.08,
-                            child: Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
+                            onTap:(){
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                                width: screenWidth*0.08,
+                                color: Colors.transparent,
+                                alignment: Alignment.centerLeft,
+                                child: Icon(Icons.arrow_back_ios, color: Colors.red,))),
 
                         Text("LSO Query",
                             style: GoogleFonts.urbanist(

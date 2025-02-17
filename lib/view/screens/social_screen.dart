@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:symphone_app/provider/DarkAndLightTheme/theme_provider.dart';
+import 'package:symphone_app/res/color.dart';
 import 'package:symphone_app/responsive/responsive_ui.dart';
 
 class SocialScreen extends StatefulWidget {
@@ -45,7 +47,13 @@ class _SocialScreenState extends State<SocialScreen> {
         ),
       ),
       child: Center(
-        child: Text("Social Screen"),
+        child: Text("Social Screen",
+            style: GoogleFonts.urbanist(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: themeProvider.isDarkMode ? AppColors.whiteColor : AppColors.blackColor,
+              letterSpacing: 0.8,
+            )),
       ),
     );
   }

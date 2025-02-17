@@ -197,9 +197,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: trendingImage.length,
                   itemBuilder: (context, index) {
+
+                    double itemWidth;
+                    if (screenWidth >= 1200) {
+                      itemWidth = screenWidth * 0.15;
+                    } else if (screenWidth >= 800) {
+                      itemWidth = screenWidth * 0.2;
+                    } else { // Mobile screen
+                      itemWidth = screenWidth * 0.285;
+                    }
+
                     return Container(
                       margin: EdgeInsets.only(right: 10.0),
-                      width: screenWidth * 0.285,
+                      width: itemWidth,
                       // height: screenHeight * 0.18,
                       alignment: Alignment.topCenter,
                       decoration: BoxDecoration(
@@ -266,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Container(
                             height: screenHeight * 0.13,
-                            width: screenWidth * 0.15,
+                            width: 70,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 begin: Alignment.topCenter,
@@ -400,9 +410,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: trendingImage.length,
                   itemBuilder: (context, index) {
+                    double itemWidth;
+                    if (screenWidth >= 1200) {
+                      itemWidth = screenWidth * 0.15;
+                    } else if (screenWidth >= 800) {
+                      itemWidth = screenWidth * 0.2;
+                    } else { // Mobile screen
+                      itemWidth = screenWidth * 0.285;
+                    }
+
                     return Container(
                         margin: EdgeInsets.only(right: 10.0),
-                        width: screenWidth * 0.285,
+                        width: itemWidth,
                         alignment: Alignment.topCenter,
                         decoration: BoxDecoration(
                           // color: Colors.white,
